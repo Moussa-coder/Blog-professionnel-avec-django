@@ -2,6 +2,11 @@
 {% block content %}
 <h2>{{ article.titre }}</h2>
 <p><em>Publié par {{ article.auteur }} le {{ article.date_publication|date:"d M Y" }}</em></p>
+<p>Tags :
+  {% for tag in article.tags.all %}
+    <a href="{% url 'articles_par_tag' tag.id %}">{{ tag.nom }}</a>{% if not forloop.last %}, {% endif %}
+  {% endfor %}
+</p>
 
 {% if article.image %}
 <img src="{{ article.image.url }}" class="img-fluid" alt="{{ article.titre }}">

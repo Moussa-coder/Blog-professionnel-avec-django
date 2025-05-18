@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+  <h2>Articles dans la catégorie "{{ categorie.nom }}"</h2>
+  <ul>
+  {% for cat in categories %}
+    <li><a href="{% url 'articles_par_categorie' cat.id %}">{{ cat.nom }}</a></li>
+  {% endfor %}
+</ul>
+  <div class="row">
+    {% for article in articles %}
+      <div class="col-md-4">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5>{{ article.titre }}</h5>
+            <p>{{ article.contenu|truncatewords:20 }}</p>
+            <a href="{% url 'article_detail' article.slug %}">Lire l'article</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
